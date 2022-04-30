@@ -8,6 +8,8 @@ function requestPayment(name, desc, curr, amt) {
     frameDescription: desc,
     currency: curr,
     amount: amt,
+    defaultPaymentMethod: 'credit_card',
+    otherPaymentMethods: ['internet_banking', 'rabbit_linepay', 'truemoney', 'googlepay', 'bill_payment_tesco_lotus'],
   })
 }
 
