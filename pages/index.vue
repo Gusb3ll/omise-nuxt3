@@ -2,28 +2,20 @@
 
 const config = useRuntimeConfig().public
 
+function requestPayment(name, desc, curr, amt) {
+  OmiseCard.open({
+    frameLabel: name,
+    frameDescription: desc,
+    currency: curr,
+    amount: amt,
+  })
+}
+
 onMounted(() => {
   OmiseCard.configure({
     publicKey: config.omise.pubkey,
     image: 'https://cdn.omise.co/assets/dashboard/images/omise-logo.png',
-    frameLabel: 'Push shop',
   })
-
-  OmiseCard.configureButton('.checkout-button-1', {
-    amount: 99900, // 999.00฿
-  })
-
-  OmiseCard.configureButton('.checkout-button-2', {
-    amount: 6900, // 69.00$
-    currency: 'usd',
-  })
-
-  OmiseCard.configureButton('.checkout-button-3', {
-    amount: 42000, // 420.00¥
-    currency: 'yen',
-  })
-
-  OmiseCard.attach()
 })
 </script>
 
@@ -43,13 +35,14 @@ onMounted(() => {
             <h1 class="text-3xl">
               999฿
             </h1>
-            <form>
-              <button type="submit" class="checkout-button-1 bg-cyan-600 hover:bg-cyan-700 px-8 py-2 rounded-xl transition-all">
-                <h1 class="text-xl text-white">
-                  Buy
-                </h1>
-              </button>
-            </form>
+            <button
+              class="bg-cyan-600 hover:bg-cyan-700 px-8 py-2 rounded-xl transition-all"
+              @click="requestPayment('Rei plush', 'Rei plush invoices', 'THB', 99900)"
+            >
+              <h1 class="text-xl text-white">
+                Buy
+              </h1>
+            </button>
           </div>
         </div>
         <div id="item2" class="flex flex-row gap-x-4 px-8 py-2 border-2 border-black rounded-xl bg-white">
@@ -61,13 +54,14 @@ onMounted(() => {
             <h1 class="text-3xl">
               69$
             </h1>
-            <form>
-              <button type="submit" class="checkout-button-2 bg-cyan-600 hover:bg-cyan-700 px-8 py-2 rounded-xl transition-all">
-                <h1 class="text-xl text-white">
-                  Buy
-                </h1>
-              </button>
-            </form>
+            <button
+              type="submit" class="checkout-button-2 bg-cyan-600 hover:bg-cyan-700 px-8 py-2 rounded-xl transition-all"
+              @click="requestPayment('Fumo plush', 'Fumo plush invoices', 'USD', 6900)"
+            >
+              <h1 class="text-xl text-white">
+                Buy
+              </h1>
+            </button>
           </div>
         </div>
         <div id="item3" class="flex flex-row gap-x-4 px-8 py-2 border-2 border-black rounded-xl bg-white">
@@ -79,13 +73,14 @@ onMounted(() => {
             <h1 class="text-3xl">
               420¥
             </h1>
-            <form>
-              <button type="submit" class="checkout-button-3 bg-cyan-600 hover:bg-cyan-700 px-8 py-2 rounded-xl transition-all">
-                <h1 class="text-xl text-white">
-                  Buy
-                </h1>
-              </button>
-            </form>
+            <button
+              type="submit" class="checkout-button-3 bg-cyan-600 hover:bg-cyan-700 px-8 py-2 rounded-xl transition-all"
+              @click="requestPayment('Astlofo plush', 'Astlofo plush invoices', 'YEN', 42000)"
+            >
+              <h1 class="text-xl text-white">
+                Buy
+              </h1>
+            </button>
           </div>
         </div>
       </div>
